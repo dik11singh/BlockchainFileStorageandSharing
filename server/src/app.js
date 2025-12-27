@@ -30,6 +30,13 @@ app.get('/health', (req, res) => {
   });
 });
 
+// 2b. Root route - redirect to health check (helps browsers and load balancers)
+app.get('/', (req, res) => {
+  return res.redirect('/health');
+});
+// 2c. Favicon route - avoid unnecessary 404 noise from browsers
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // 3. API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/files', fileRoutes);

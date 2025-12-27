@@ -22,6 +22,12 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  const { isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div className="h-screen flex items-center justify-center"><Loader.Skeleton className="w-20 h-20" /></div>;
+  }
+
   return (
     <Router>
       <Routes>
